@@ -11,7 +11,7 @@
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) TwitterTableViewDataSource *dataSource;
@@ -45,15 +45,25 @@
 }
 
 - (IBAction)composeTweet:(id)sender {
+    [self openTweetSheetWithText:@"This tweet brought to you by a tapped bar button!"];
+}
+
+- (void)openTweetSheetWithText:(NSString *)text {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
         SLComposeViewController *tweetSheet = [SLComposeViewController
-                                                  composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [tweetSheet setInitialText:@"I programmatically created this tweet!"];
+                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [tweetSheet setInitialText:text];
         [self presentViewController:tweetSheet animated:YES completion:nil];
     } else {
         NSLog(@"Error. Twitter Service is unavailable.");
     }
+}
+
+#pragma mark - UITableView Delegate Methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self openTweetSheetWithText:@"This tweet brought to you by a selected table view cell!"];
 }
 
 - (void)didReceiveMemoryWarning {
