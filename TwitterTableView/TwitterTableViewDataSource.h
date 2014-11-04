@@ -13,6 +13,6 @@
 
 @property (strong, nonatomic) NSArray *twitterAccounts;
 
-- (void) registerTableView:(UITableView *)tableView;
+- (void)registerTableView:(UITableView *)tableView;
 
 @end

@@ -18,7 +18,7 @@
 
 @implementation TwitterTableViewDataSource
 
-- (void) registerTableView:(UITableView *)tableView {
+- (void)registerTableView:(UITableView *)tableView {
     self.tableView = tableView;
     [tableView registerClass:[TwitterAccountCell class] forCellReuseIdentifier:@"twitterCell"];
 }
