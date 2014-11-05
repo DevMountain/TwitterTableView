@@ -27,6 +27,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.dataSource = [TwitterTableViewDataSource new];
     self.tableView.dataSource = self.dataSource;
+    self.tableView.delegate = self;
     [self.dataSource registerTableView:self.tableView];
     
     ACAccountStore *accountStore = [ACAccountStore new];
@@ -44,10 +45,6 @@
     [self.view addSubview:self.tableView];
 }
 
-- (IBAction)composeTweet:(id)sender {
-    [self openTweetSheetWithText:@"This tweet brought to you by a tapped bar button!"];
-}
-
 - (void)openTweetSheetWithText:(NSString *)text {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
@@ -58,6 +55,10 @@
     } else {
         NSLog(@"Error. Twitter Service is unavailable.");
     }
+}
+
+- (IBAction)composeTweet:(id)sender {
+    [self openTweetSheetWithText:@"This tweet brought to you by a tapped bar button!"];
 }
 
 #pragma mark - UITableView Delegate Methods
